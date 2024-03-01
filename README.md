@@ -196,5 +196,10 @@ heroku create django-api
 heroku create oseongryu-django-test
 git push heroku master
 
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+heroku open
+
+appname.herokuapp.com
 ```
 
