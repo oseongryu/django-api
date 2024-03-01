@@ -1,4 +1,4 @@
-# 1. project setting
+## 1. project setting
 
 ### init
 ```bash
@@ -36,11 +36,14 @@ TIME_ZONE = 'Asia/Seoul'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ```
 
+```bash
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+```
 
 ## 2. hello api 만들기
+
 ### serializers.py
 ```py
 from rest_framework import serializers
@@ -73,13 +76,13 @@ from .views import helloAPI
 urlpatterns = [
     path('hello/', helloAPI),
 ]
-
 ```
 
 ## 3. quiz api
 
 ### admin.py
-```
+
+```py
 from django.contrib import admin
 from .models import Quiz
 
@@ -87,22 +90,25 @@ from .models import Quiz
 admin.site.register(Quiz)
 ```
 
-    python manage.py makemigrations
-    python manage.py migrate
-
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
 ## 4. admin
 
-    python manage.py createsuperuser
-    python manage.py runserver
+```bash
+python manage.py createsuperuser
+python manage.py runserver
 
-    http://localhost:8000/admin
+http://localhost:8000/admin
 
-    로그인후 등록
+로그인후 등록
 
-    http://localhost:8000/quiz/3
-
+http://localhost:8000/quiz/3
 ```
+
+```json
 [
     {
         "title": "플러터의 타입이 아닌 것은?",
@@ -125,5 +131,70 @@ admin.site.register(Quiz)
         "answer": 1
     }
 ]
+```
+
+## 5. deploy
+
+pythonanywhere, heroku
+헤로쿠 설치 & 배포 가이드: https://devcenter.heroku.com/articles/getting-started-with-python
+
+```bash
+pip install --upgrade pip
+pip install django-cors-headers #cors 에러방지
+pip install gunicorn #배포를 위한 도구
+pip install psycopg2-binary dj-database-url #Heroku postegresql
+pip install whitenoise #정적파일사용 미들웨어
+
+pip freeze > requirements.txt
+```
+
+settings.py
+```py
+import dj_database_url
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-oc+f)8v1n&g)6ca3r#2!9=yu6zjgm8gqv8oqhfu87ld349q&_b' )
+
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-oc+f)8v1n&g)6ca3r#2!9=yu6zjgm8gqv8oqhfu87ld349q&_b' )
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+```
+
+### heroku setting
+Procfile
+runtime.txt
+
+```bash
+brew install heroku/brew/heroku
+```
+
+### git project
+```bash
+git init
+git add .
+git commit -m "commit"
+git remote add origin ""
+git push -u origin main
+```
+
+### HEROKU 가입
+```bash
+heroku login
+heroku create django-api
+heroku create oseongryu-django-test
+git push heroku master
+
 ```
 
