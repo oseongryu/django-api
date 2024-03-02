@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.tabSize": 2,
+		"editor.formatOnSave": true,
+		"explorer.autoReveal": true,
+		"files.eol": "\n",
+		"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+		"editor.suggestSelection": "first",
+		"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+		"path-intellisense.extensionOnImport": true,
+		"files.associations": {
+			"*.json": "jsonc"
+		},
+		"editor.fontFamily": "D2Coding,  Consolas, 나눔고딕코딩, 'Courier New', monospace",
+		"git.autofetch": true,
+		"editor.formatOnPaste": true,
+		"editor.formatOnType": true,
+	},
+	"svn.ignoreMissingSvnWarning": true,
+	"python.terminal.activateEnvInCurrentTerminal": true,
+	"python.defaultInterpreterPath": "./venv/bin/activate",
+	"editor.insertSpaces": true,
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter",
+		"editor.formatOnSave": true
+	},
+	"python.formatting.provider": "none",
+}
